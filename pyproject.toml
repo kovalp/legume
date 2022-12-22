@@ -2,7 +2,7 @@
 name = "legume-gme-tocha"
 version = "0.2.0"
 description = "Guided-mode expansion for 2.5D photonic crystals."
-authors = ["@https://github.com/momchilmm", "Peter Koval <koval.peter@gmail.com>"]
+authors = ["Momchil Minkov <his@email.com>", "Peter Koval <koval.peter@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "legume"}]
