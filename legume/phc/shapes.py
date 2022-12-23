@@ -213,7 +213,7 @@ class Poly(Shape):
         test = path.contains_points(points.T)
         return test.reshape((x.shape))
 
-    def rotate(self, angle):
+    def rotate(self, angle: float) -> 'Poly':
         """Rotate the polygon around its center of mass by `angle` radians
         """
 
