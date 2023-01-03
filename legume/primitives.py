@@ -1,11 +1,9 @@
 import numpy as np
 import scipy.sparse as sp
-from functools import partial
-from .utils import toeplitz_block, get_value, fsolve, extend
+from .utils import toeplitz_block, fsolve, extend
 
-from autograd.extend import primitive, defvjp, vspace
-from autograd import grad, vector_jacobian_product
-import autograd.numpy as npa
+from autograd.extend import primitive, defvjp
+from autograd import grad
 """ Define here various primitives needed for the main code 
 To use with both numpy and autograd backends, define the autograd primitive of 
 a numpy function fnc as fnc_ag, and then define the vjp"""
@@ -312,7 +310,7 @@ defvjp(fsolve_ag, *vjp_factory_fsolve([False, True, True]))
 @primitive
 def fmap(fns, params):
     """ autograd-ready version of functools.fmap applied to a list of functions
-    `fns` taking the same parmeters `params`
+    `fns` taking the same parameters `params`
     Arguments:
         `fns`: list of functions of `params` that return a scalar
         `params`: array of parameters feeding into each individual computation

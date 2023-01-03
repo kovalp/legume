@@ -7,13 +7,14 @@ from .slab_modes import guided_modes, rad_modes
 from . import matrix_elements
 from legume.backend import backend as bd
 from legume.utils import get_value, ftinv, find_nearest
+from legume.phc import PhotCryst
 
 
 class GuidedModeExp(object):
     """
     Main simulation class of the guided-mode expansion.
     """
-    def __init__(self, phc, gmax=3., truncate_g='tbt'):
+    def __init__(self, phc: PhotCryst, gmax=3., truncate_g='tbt'):
         """Initialize the guided-mode expansion.
         
         Parameters

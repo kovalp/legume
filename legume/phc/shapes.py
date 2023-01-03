@@ -105,7 +105,7 @@ class Circle(Shape):
 class Poly(Shape):
     """Polygon shape
     """
-    def __init__(self, eps=1., x_edges=[0.], y_edges=[0.]):
+    def __init__(self, eps=1., x_edges=[0.], y_edges=[0.]) -> None:
         """Create a polygon shape
 
         Parameters
@@ -152,7 +152,6 @@ class Poly(Shape):
         (gx, gy) = self._parse_ft_gvec(gvec)
 
         (xj, yj) = self.x_edges, self.y_edges
-        npts = xj.shape[0]
         ng = gx.shape[0]
         # Note: the paper uses +1j*g*x convention for FT while we use
         # -1j*g*x everywhere in legume
@@ -196,11 +195,9 @@ class Poly(Shape):
         if np.sum(ind_gx) > 0:
             bgtemp = bd.dot(gx, bj)
             agtemp1 = bd.dot(gy, yj) + bd.dot(gx, aj * yj)
-            agtemp2 = bd.dot(gy, bd.roll(yj, -1, axis=1)) + \
-                        bd.dot(gx, aj * bd.roll(yj, -1, axis=1))
+            agtemp2 = bd.dot(gy, bd.roll(yj, -1, axis=1)) + bd.dot(gx, aj * bd.roll(yj, -1, axis=1))
             denom = gx * (gy + bd.dot(gx, aj))
-            ftemp = -bd.sum(bd.exp(1j*bgtemp) * (bd.exp(1j * agtemp2) - \
-                    bd.exp(1j * agtemp1)) * \
+            ftemp = -bd.sum(bd.exp(1j*bgtemp) * (bd.exp(1j * agtemp2) - bd.exp(1j * agtemp1)) * \
                     denom / (bd.square(denom) + 1e-50) , axis=1)
             ft = bd.where(ind_gx, ftemp, ft)
 
@@ -213,7 +210,7 @@ class Poly(Shape):
         test = path.contains_points(points.T)
         return test.reshape((x.shape))
 
-    def rotate(self, angle):
+    def rotate(self, angle: float) -> 'Poly':
         """Rotate the polygon around its center of mass by `angle` radians
         """
 
