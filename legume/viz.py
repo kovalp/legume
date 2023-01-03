@@ -1,3 +1,5 @@
+from typing import Union
+
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
@@ -609,9 +611,7 @@ def structure(struct,
                 ax[indl].set_title("xy in layer %d" % indl)
 
 
-def eps_ft(struct,
-           Nx=100,
-           Ny=100,
+def eps_ft(struct: Union[GuidedModeExp, PlaneWaveExp], Nx: int = 100, Ny: int = 100,
            cladding=False,
            cbar=True,
            cmap='Greys',

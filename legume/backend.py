@@ -46,7 +46,9 @@ class NumpyBackend(Backend):
 
     # methods
     sum = staticmethod(np.sum)
+    prod = staticmethod(np.prod)
     stack = staticmethod(np.stack)
+    column_stack = staticmethod(np.column_stack)
     hstack = staticmethod(np.hstack)
     vstack = staticmethod(np.vstack)
     transpose = staticmethod(np.transpose)
@@ -58,6 +60,7 @@ class NumpyBackend(Backend):
     triu = staticmethod(np.triu)
     amax = staticmethod(np.amax)
     max = staticmethod(np.max)
+    matmul = staticmethod(np.matmul)
     min = staticmethod(np.min)
     sort = staticmethod(np.sort)
     argsort = staticmethod(np.argsort)
@@ -68,6 +71,7 @@ class NumpyBackend(Backend):
     # math functions
     exp = staticmethod(np.exp)
     bessel1 = staticmethod(sp.special.j1)
+    sinc = staticmethod(np.sinc)
     sqrt = staticmethod(np.sqrt)
     divide = staticmethod(np.divide)
     abs = staticmethod(np.abs)
@@ -109,7 +113,9 @@ if AG_AVAILABLE:
         """ Autograd Backend """
         # methods
         sum = staticmethod(npa.sum)
+        prod = staticmethod(npa.prod)
         stack = staticmethod(npa.stack)
+        column_stack = staticmethod(npa.column_stack)
         hstack = staticmethod(npa.hstack)
         vstack = staticmethod(npa.vstack)
         transpose = staticmethod(npa.transpose)
@@ -132,6 +138,7 @@ if AG_AVAILABLE:
         exp = staticmethod(npa.exp)
         bessel1 = staticmethod(spa.special.j1)
         sqrt = staticmethod(sqrt_ag)
+        sinc = staticmethod(npa.sinc)
         divide = staticmethod(npa.divide)
         abs = staticmethod(npa.abs)
         square = staticmethod(npa.square)
@@ -160,7 +167,7 @@ if AG_AVAILABLE:
         linspace = staticmethod(npa.linspace)
         arange = staticmethod(npa.arange)
         newaxis = staticmethod(npa.newaxis)
-
+        matmul = staticmethod(npa.matmul)
 
 backend = NumpyBackend()
 
@@ -178,10 +185,9 @@ def set_backend(name):
     """
     # perform checks
     if name == 'autograd' and not AG_AVAILABLE:
-        raise ValueError("Autograd backend is not available, autograd must \
-            be installed.")
+        raise ValueError("Autograd backend is not available, autograd must be installed.")
 
-    # change backend by monkeypatching
+    # change backend by monkey patching
     if name == 'numpy':
         backend.__class__ = NumpyBackend
     elif name == 'autograd':

@@ -1,14 +1,14 @@
-import numpy as np
-from autograd.numpy.numpy_boxes import ArrayBox
-from autograd import value_and_grad
-from scipy.optimize import minimize
 import time
+from typing import Callable
+
+from autograd import value_and_grad
+import numpy as np
+from scipy.optimize import minimize
 
 
 class Minimize(object):
-    """Wrapping up custom and SciPy optimizers in a common class
-    """
-    def __init__(self, objective):
+    """Wrapping up custom and SciPy optimizers in a common class."""
+    def __init__(self, objective: Callable):
 
         self.objective = objective
 
